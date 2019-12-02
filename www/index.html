@@ -1,0 +1,88 @@
+<!-- =======================================================
+    Author: Ashok
+    description: Delete associated products in products table when admin deletes one category.
+	node version:8.9.4
+	npm version:6.4.1
+  ======================================================= -->
+  
+<!DOCTYPE html>
+<html>
+<head>
+		<meta charset='utf-8'>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="description" content="Del_Category">
+		<meta name="author" content="Ashok">
+		<title>Sample</title>	
+		<!-- Font Awesome -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
+		<!-- Bootstrap core CSS -->
+		<link rel='stylesheet' href='css/bootstrap.min.css'> 		
+		<!-- angular Start-->
+		<script src='js/angular.js'></script>		
+		<script src='js/angular-route.min.js'></script>
+		<script src='js/ui-bootstrap-tpls-1.1.1.min.js'></script>
+		<script src='js/bootstrap-3.3.7.js'></script>		
+ 		<script src='cjs/index.js'></script>
+		<!-- angular End-->
+	  
+</head>
+
+<body ng-app="sampleApp" ng-controller="sampleController">
+	<div class="fluid-container">			
+		<div class="content-wrapper">
+			<div class="page-title">
+				<div >
+					<h3>Task2: Delete associated products in products table when admin deletes one category.</h3><br>
+				</div>
+			</div>				 
+			<div class="card">
+			<!------- Get List Of Categories ------------->
+				<form  role="form"  class="form-horizontal" >
+					<div  class="row"  ng-init="getcategorylist()" > 	
+						<div class="col-sm-1"></div>
+						<div class="col-sm-3">
+						 <label>Select Category For Removing:</label>
+						</div>
+						<div class="col-sm-3"> 					
+							<select class="form-control"  ng-model="category.categoryid"  selected ng-change='getmyproducts(category.categoryid)'> 
+								<option value="" selected data-default disabled>Select Category</option>
+								<option value="{{category.categoryid}}" ng-repeat="category in categorylistdata" >{{category.categoryname}}</option>	 							
+							</select> 
+						</div>
+					</div>
+					<br>
+				</form>
+				<!------- End ------------->
+				
+				<!----------- List Of Associated products Of Category -------->
+				
+				<div ng-show='productslistdata'>
+					<table style="border-color:#BEBEBE;font-size:15px;" class="table table-bordered">
+						<thead >
+							<th >S.NO</th> 
+							<th >Productcode</th> 
+							<th >Product</th>
+							<th >Category</th> 							 
+						</thead>							
+						<tbody ng-repeat="product in productslistdata">
+							<tr>
+								 <td style="border-color:#BEBEBE;" >{{$index+1}}</td>
+								 <td style="border-color:#BEBEBE;" >{{product.productid}}</td>
+								 <td style="border-color:#BEBEBE;" >{{product.productname}}</td>
+								 <td style="border-color:#BEBEBE;" >{{product.category}}</td>
+							</tr>
+						</tbody>
+					</table> 					
+						<button type='button' class='btn btn-danger' style='float:right' ng-click='DeleteCategory(category.categoryid)'> Delete </button>  
+						<Span style='color:red;float:right;font-weight:bold;' > * Proceed To Delete Category and Associated products </span>
+				</div>
+				
+				<!------- End ------------->
+				
+			</div>				
+		</div>
+	</div>
+  
+</body>
+</html>
